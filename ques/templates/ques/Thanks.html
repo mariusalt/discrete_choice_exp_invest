@@ -1,0 +1,60 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    
+{% endblock %}
+
+{% block styles %}
+<style type="text/css">
+.a{
+        padding-top: 10px ;
+    }
+.b{
+        padding-top: 10px ;
+        padding-bottom: 10px ;
+    }
+.c{
+        padding-top: 5px ;
+        padding-bottom: 10px ;
+    }
+.d{
+        padding-top: 10px ;
+        padding-bottom: 30px ;
+    }
+
+    * {
+        font-size: 18px;/* <-- fonts */
+  </style>
+{% endblock %}
+
+{% block content %}
+
+
+<div class=b>
+    <p align="justify">Als Dankeschön für Ihre Teilnahme würden wir Ihnen gerne die Ergebnisse dieser Studie als auch die Ergebnisse der Studie "Finanzierung von Unternehmensgründungen durch Privatinvestoren, Auswertungen und Analysen auf Basis des IAB/ZEW-Gründungspanels 2019" per E-Mail zusenden. <br>Wenn Sie dies wünschen, geben Sie bitte ihre E-Mailadresse im unten stehenden Feld an.<br></p>
+    <p style="font-size: 13px;">Bitte beachten wir, dass wir Ihre Daten ausschließlich zu diesem Zweck verwenden und nicht an Dritte weitergeben.  </p>
+    </div>
+
+<br>
+<table class="tbl" border=0 width="45%">
+        <tbody>
+            <tr>
+                <td   width="35%">E-Mail-Adresse:
+                </td>
+                <td  width="30%"><input type="text" name="mail">
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <br>
+    <br>
+
+
+    {% next_button %}
+
+{% endblock %}
+
+
+

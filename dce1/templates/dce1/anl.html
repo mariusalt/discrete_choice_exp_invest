@@ -1,0 +1,85 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% block title %}
+    Herzlich Willkommen zu dieser wissenschaftlichen Studie
+{% endblock %}
+{% block styles %}
+	<style type="text/css">
+	img.im1 {
+      max-width:50%;
+      max-height:50%;
+    }
+    .inp{
+      width:20%;
+    }
+    img.im1 {
+      max-width:80%;
+      max-height:80%;
+    }
+    img.im2 {
+    -ms-interpolation-mode: bicubic;
+    max-width:85%;
+    height: auto;
+    width: auto;
+    width: auto\20;
+  }
+  .invest{
+    position:relative;
+    height:100px;
+    margin-bottom: 20px;
+  }
+  #p1{
+    position:absolute;
+    left:20.2%;
+    top:30%;
+  }
+
+    input[type='radio'] { transform: scale(2); }
+	.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  }
+	.textDiv {
+		position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+		z-index:7;
+	}
+	.cont {
+		z-index:1;
+	}
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+<p align="justify">
+Sehr geehrte Teilnehmerin, sehr geehrter Teilnehmer,<br><br>
+vielen Dank für Ihr Interesse an unserer wissenschaftlichen Studie.<br>Sie können in Kürze mit der Bearbeitung beginnen. Vorab finden Sie hier die wichtigsten Eckpunkte zu Ihrer Teilnahme:
+<ul>
+    <li>Die Teilnahme dauert durchschnittlich 10 Minuten.</li>
+    <li>In dieser Studie bitten wir Sie hypothetische Investitionsentscheidungen zu treffen und einen Fragebogen auszufüllen.</li>
+    <li>Ihre Angaben werden streng vertraulich behandelt und ausschließlich zu wissenschaftlichen Zwecken verwendet.</li>
+</ul>
+
+Klicken Sie nun auf „Weiter“, damit die Studie beginnen kann.
+</p>
+<table class="table">
+    <table border=0 class="centerTable" width = "100%">
+        <tbody>
+            <tr>
+                <td width="37%" style="vertical-align: top; text-align: left" > {% next_button %}</td>
+                <td width="13%" style="text-align: center" ><img class=im2 src="{% static "idce/zew.jpg" %}" /></td>
+                <td width="20%" style="text-align: center" ><img class=im1 src="{% static "idce/tum.png" %}" /></td>
+                <td width="20%" style="text-align: center" ><img class=im1 src="{% static "idce/ku.png" %}" /></td>
+            </tr>
+        </tbody>
+    </table>
+
+   
+
+{% endblock %}

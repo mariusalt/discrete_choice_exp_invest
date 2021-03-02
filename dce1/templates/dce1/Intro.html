@@ -1,0 +1,560 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% block title %}
+    Generelle Informationen
+{% endblock %}
+{% block styles %}
+	<style type="text/css">
+	img.im1 {
+      max-width:50%;
+      max-height:50%;
+    }
+    img.im2 {
+      max-width:50%;
+      max-height:50%;
+    }
+    img.im3 {
+      max-width:60%;
+      max-height:60%;
+    }
+#p1 {
+    width: 5%;
+    position: absolute;
+    top: 60%;
+    left: 75%;
+}
+#p2 {
+    width: 5%;
+    position: absolute;
+    top: 60%;
+    left: 1%;
+}
+#p3 {
+    width: 5%;
+    position: absolute;
+    top: 30%;
+    left: 78.5%;
+    font-size: 18px;
+    font-weight: bold;
+    z-index:-19;
+}
+#p4 {
+    width: 5%;
+    position: absolute;
+    top: 30%;
+    left: 0.7%;
+    font-size: 18px;
+    font-weight: bold;
+    z-index:-20;
+}
+.b { 
+    position: relative;
+    margin-top:20px;
+    width: 100%;
+    height:80px;
+
+}
+    input[type='radio'] { transform: scale(2); }
+	.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  }
+	.textDiv {
+		position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+		z-index:7;
+	}
+	.cont {
+		z-index:1;
+	}
+  #show2 {
+    width: 15%;
+    position: absolute;
+    top: -4%;
+    left: 34.3%;
+    font-weight: bold;
+}
+.slider2 {
+    -webkit-appearance: none;
+    margin: 18px 0;
+    width: 100%;
+    z-index:20;
+}
+
+.slider2:focus {
+    outline: none;
+    z-index:20;
+}
+
+.slider2::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background: #3071a9;
+    border-radius: 1.3px;
+    border: 0.2px solid #010101;
+    z-index:20;
+    
+}
+
+.slider2::-webkit-slider-thumb {
+    border: 0px;
+    height: 0px;
+    width: 0px;
+    border-radius: 0px;
+    -webkit-appearance: none;
+    z-index:20;
+}
+
+
+.slider2 {
+    -moz-appearance: none;
+    margin: 18px 0;
+    width: 100%;
+    z-index:20;
+   
+}
+
+
+.slider2::-moz-range-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background: #3071a9;
+    border-radius: 1.3px;
+    border: 0.2px solid #010101;
+    z-index:20;
+}
+
+.slider2::-moz-range-thumb {
+    border: 0px;
+    height: 0px;
+    width: 0px;
+    border-radius: 0px;
+    -moz-appearance: none;
+    z-index:20;
+}
+
+
+
+.slider2 {
+    width: 80%;
+    position: absolute;
+    z-index:20;
+}
+
+.myclass::-webkit-slider-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    border: 1px solid #000000;
+    height: 36px !important;
+    width: 20px !important;
+    border-radius: 3px !important;
+    background: #ffffff !important;
+    cursor: pointer !important !important;
+    -webkit-appearance: none !important;
+    margin-top: -14px !important;
+    z-index:20;
+}
+
+.myclass::-moz-range-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    border: 1px solid #000000;
+    height: 36px !important;
+    width: 20px !important;
+    border-radius: 3px !important;
+    background: #ffffff !important;
+    cursor: pointer !important !important;
+    -webkit-appearance: none !important;
+    margin-top: -14px !important;
+    z-index:20;
+}
+.button1 {
+  -moz-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #b7bac2), color-stop(1, #7c858f));
+  background:-moz-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-webkit-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-o-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-ms-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:linear-gradient(to bottom, #b7bac2 5%, #7c858f 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7bac2', endColorstr='#7c858f',GradientType=0);
+  background-color:#b7bac2;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #7c7f87;
+  display:inline-block;
+  cursor:pointer;
+  color:white;
+  font-family:Arial;
+  font-size:14px;
+  padding:5px 32px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #1c2847;
+  }
+  .button1:hover {
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7c858f), color-stop(1, #b7bac2));
+  background:-moz-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-webkit-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-o-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-ms-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:linear-gradient(to bottom, #7c858f 5%, #b7bac2 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7c858f', endColorstr='#b7bac2',GradientType=0);
+  background-color:#7c858f;
+  }
+  .button1:active {
+  position:relative;
+  top:1px;
+  }
+#button {
+  background-color:#4f75ff;
+  border-color:#4f75ff;
+  }
+  #button:hover {
+  background-color:#3c5ccf;
+  }
+  #button:focus {
+    outline: 0;
+    box-shadow: 0 0 4px blue;
+  }
+    </style>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+<script language="javascript" type="text/javascript"> 
+ function ch1(){
+  document.getElementById("textInput3").value = 1;
+  if (document.getElementById("textInput2").value != ""){
+  d=document.getElementById("textInput2").value;
+  k=Math.round((d-12)*10)/10;
+  l=Math.round((12-d)*10)/10;
+  if (d>12){
+  document.getElementById("sol").innerHTML="Tatsächlicher Anteil: 12%. Ihre Einschätzung war um " + k + " Prozentpunkte zu hoch."
+  document.getElementById("sol").style.backgroundColor = "#fca4a4";
+  document.getElementById("sol").style.width = "68%";
+  document.getElementById("sol").style.textAlign = "center";
+  document.getElementById("sol").style.fontWeight = "bold";
+} else if (d<12){
+  document.getElementById("sol").innerHTML="Tatsächlicher Anteil: 12%. Ihre Einschätzung war um " + l + " Prozentpunkte zu niedrig."
+  document.getElementById("sol").style.backgroundColor = "#fca4a4";
+  document.getElementById("sol").style.width = "68%";
+  document.getElementById("sol").style.textAlign = "center";
+  document.getElementById("sol").style.fontWeight = "bold";
+} else if (d==12){
+  document.getElementById("sol").innerHTML="Tatsächlicher Anteil: 12%. Sie liegen mit Ihrer Einschätzung richtig."
+  document.getElementById("sol").style.backgroundColor = "lightgreen";
+  document.getElementById("sol").style.width = "60%";
+    document.getElementById("sol").style.textAlign = "center";
+  document.getElementById("sol").style.fontWeight = "bold";
+}
+document.getElementById("inf").innerHTML="Datenquelle: IAB/ZEW Startup-Panel 2020";
+document.getElementById("inf").style.fontSize="12px";
+document.getElementById("b1").style.display="none"
+ }
+}
+
+
+ var slider2 = document.getElementById("slider2");
+var output2 = document.getElementById("show2");
+output2.innerHTML = slider2.value;
+
+slider2.oninput = function() {
+  output2.innerHTML = this.value + "%";
+}
+
+function updateTextInput2(val) {
+          document.getElementById('textInput2').value=val; 
+          }
+$(document).ready(function () {
+        $('.slider2').on('input change', function () {
+            $('.slider2').addClass('myclass');
+        });
+
+    });
+document.getElementById("show2").style.display="none";
+function showhide2()
+    {
+      document.getElementById("show2").style.display="block";
+    } 
+
+function edit() {
+  var x = document.getElementById("id_inv").value;
+  x = x.replace(/\D/g,'');
+  document.getElementById("inv1").value=x;
+  window.sessionStorage.setItem("inv1", x);
+  k = x.replace(/\B(?=(\d{3})+(?!\d))/g,".");
+
+  y1 = x.substring(x.length-3);
+  if (y1.length == 1){
+    y1 = "0,00";
+  }
+  else if (y1.length == 2){
+    y1 = "0,0" + Math.round(Number(y1)/10).toString();
+  }
+  else if (y1.length > 2 && y1.charAt(1)=="0") {
+    y1 = "," + Math.round(Number(y1)/100).toString();
+  }
+  else if (y1.length > 2 && y1.charAt(1)!="0") {
+    y1 = "," + Math.round(Number(y1)/10).toString();
+  }
+  y2 = "";
+  if (x.length == 3) {
+     y2 = "0";
+   }
+  if (x.length > 3) {
+    y2 = Math.floor(Number(x)/1000).toString();
+  }
+  y2 = y2.replace(/\D/g,'');
+  y2 = y2.replace(/\B(?=(\d{3})+(?!\d))/g,".");
+  y = y2 + y1;
+
+  m1 = x.substring(x.length-6);
+  if (m1.length < 5){
+    m1 = "0,00";
+  }
+  else if (m1.length == 5){
+    m1 = "0,0" + Math.round(Number(m1)/100000).toString();
+  }
+  else if (m1.length == 6) {
+    m1 = "," + + Math.round(Number(m1)/10000).toString();
+  }
+  m2 = "";
+  if (x.length == 6) {
+    m2="0";
+  }
+  if (x.length > 6) {
+    m2 = Math.floor(Number(x)/1000000).toString();
+  }
+  m2 = m2.replace(/\D/g,'');
+  m2 = m2.replace(/\B(?=(\d{3})+(?!\d))/g,".");
+  m = m2 + m1;
+
+
+  document.getElementById("inved").innerHTML = "In Euro:    " + k + "€" + "<br />" +"In Tsd. Euro: " + y + " Tsd.€"+ "<br />" +"In Mio. Euro: " + m + " Mio.€";
+  inved = "In Euro:    " + k + "€" + "<br />" +"In Tsd. Euro: " + y + " Tsd.€"+ "<br />" +"In Mio. Euro: " + m + " Mio.€";
+  window.sessionStorage.setItem("inved", inved);
+
+}
+
+function store() {
+    slider2 = document.getElementById("slider2").value;
+   window.sessionStorage.setItem("slider2", slider2);
+  Value = document.getElementById("id_abcd").value;
+    console.log(Value++);
+    document.getElementById("id_abcd").value = Value;
+  id_inv = document.getElementById("id_inv").value;
+   window.sessionStorage.setItem("id_inv", id_inv);
+   textInput3 = document.getElementById("textInput3").value;
+   window.sessionStorage.setItem("textInput3", textInput3);
+
+
+ }
+window.onload = function() {
+  if (document.getElementById("id_abcd").value > 0) {
+    document.getElementById("textInput2").value = sessionStorage.getItem("slider2");
+    document.getElementById("slider2").value = sessionStorage.getItem("slider2");
+    document.getElementById("id_inv").value = sessionStorage.getItem("id_inv");
+    document.getElementById("inved").innerHTML = sessionStorage.getItem("inved");
+    document.getElementById("inv1").value = sessionStorage.getItem("inv1");
+    $('.slider2').addClass('myclass');
+    document.getElementById("show2").innerHTML = sessionStorage.getItem("slider2") + "%";
+    document.getElementById("show2").style.display="block";
+    document.getElementById("textInput3").value = sessionStorage.getItem("textInput3");
+  }
+}
+document.getElementById("wong").style.visibility="hidden"
+</script>
+{% endblock %}
+
+{% block content %}
+<p align="justify">Im Folgenden sehen Sie eine Reihe von <strong>Finanzierungsgesuchen von innovativen Unternehmensgründungen (Startups)</strong>. In jeder Runde sehen Sie jeweils drei Startups im Vergleich. <br><br>
+Es handelt sich um Startups, die <strong>bisher noch keine Finanzierung erhalten haben</strong>. <br><br> 
+Stellen Sie sich vor, <strong>die Startups sind auf Sie zugekommen</strong> und haben Sie mit Informationen über deren Unternehmensprofil versehen bspw. durch ein Pitch Deck oder über einen One Pager. Aus diesen Informationen haben Sie einige relevante Eckdaten über die Startups zusammengefasst. Den Investmentbetrag tätigen <strong>Sie als alleiniger Investor</strong>.<br><br> </p>
+<strong><u>Die Startups unterscheiden sich nur in den unten erwähnten Punkten, in allen anderen Eigenschaften (Team, Wettbewerbssituation etc.) sind sie identisch.</u></strong><br>
+
+
+<table class="centerTable" style="border-collapse: collapse; height: 221px; margin-bottom:10px;" border="1" width="100%" cellpadding="5">
+<tbody>
+<tr >
+  {% if participant.vars.row1 == 1 %}
+<td ><strong>Ökologischer Beitrag:</strong> </td>
+<td style="text-align:left;">Geschäftsidee trägt positiv zum Umwelt-/Klimaschutz bei, indem sie z.B. zu relativ geringeren Emissionen führt oder ressourcenschonend wirkt. </td>
+{% elif participant.vars.row1 == 2 %}
+<td ><strong>Erwartete Rendite::</strong></td>
+<td  style="text-align:left;">Erwarteter interner Zinsfuß des Investments den Sie aus den Angaben der Gründer zu Zeitpunkt und Höhe der erwarteten Cash-Flows grob kalkuliert haben. </td>
+{% elif participant.vars.row1 == 3 %}
+<td ><strong>Positive Cash-Flow-Prognose:</strong></td>
+<td  style="text-align:left;">Dauer bis Einnahmen aus dem laufenden Geschäft höher sind als die Aufwendungen.  </td>
+{% elif participant.vars.row1 == 4 %}
+<td ><strong>Investitionshöhe:<br>(Kapitalbedarf)</strong></td>
+<td  style="text-align:left;"> Investitionsbetrag in Euro der dem Startup zufließt.</td>
+{% elif participant.vars.row1 == 5 %}
+<td ><strong>Innovationsgrad:</strong></td>
+<td  style="text-align:left;"> Inkrementelle Innovationen ergänzen und erweitern existierende Produkte und Prozesse. Durchbruchsinnovationen verändern Märkte und können existierende Produkte und Prozesse obsolet machen.   </td>
+{% endif %}
+</tr>
+<tr >
+  {% if participant.vars.row2 == 1 %}
+<td ><strong>Ökologischer Beitrag:</strong> </td>
+<td style="text-align:left;">Geschäftsidee trägt positiv zum Umwelt-/Klimaschutz bei, indem sie z.B. zu relativ geringeren Emissionen führt oder ressourcenschonend wirkt. </td>
+{% elif participant.vars.row2 == 2 %}
+<td ><strong>Erwartete Rendite:</strong></td>
+<td  style="text-align:left;">Erwarteter interner Zinsfuß des Investments den Sie aus den Angaben der Gründer zu Zeitpunkt und Höhe der erwarteten Cash-Flows grob kalkuliert haben. </td>
+{% elif participant.vars.row2 == 3 %}
+<td ><strong>Positive Cash-Flow-Prognose:</strong></td>
+<td  style="text-align:left;">Dauer bis Einnahmen aus dem laufenden Geschäft höher sind als die Aufwendungen.  </td>
+{% elif participant.vars.row2 == 4 %}
+<td ><strong>Investitionshöhe:<br>(Kapitalbedarf)</strong></td>
+<td  style="text-align:left;"> Investitionsbetrag in Euro der dem Startup zufließt.</td>
+{% elif participant.vars.row2 == 5 %}
+<td ><strong>Innovationsgrad:</strong></td>
+<td  style="text-align:left;"> Inkrementelle Innovationen ergänzen und erweitern existierende Produkte und Prozesse. Durchbruchsinnovationen verändern Märkte und können existierende Produkte und Prozesse obsolet machen.   </td>
+{% endif %}
+</tr>
+<tr >
+  {% if participant.vars.row3 == 1 %}
+<td ><strong>Ökologischer Beitrag:</strong> </td>
+<td style="text-align:left;">Geschäftsidee trägt positiv zum Umwelt-/Klimaschutz bei, indem sie z.B. zu relativ geringeren Emissionen führt oder ressourcenschonend wirkt. </td>
+{% elif participant.vars.row3 == 2 %}
+<td ><strong>Erwartete Rendite:</strong></td>
+<td  style="text-align:left;">Erwarteter interner Zinsfuß des Investments den Sie aus den Angaben der Gründer zu Zeitpunkt und Höhe der erwarteten Cash-Flows grob kalkuliert haben. </td>
+{% elif participant.vars.row3 == 3 %}
+<td ><strong>Positive Cash-Flow-Prognose:</strong></td>
+<td  style="text-align:left;">Dauer bis Einnahmen aus dem laufenden Geschäft höher sind als die Aufwendungen.  </td>
+{% elif participant.vars.row3 == 4 %}
+<td ><strong>Investitionshöhe:<br>(Kapitalbedarf)</strong></td>
+<td  style="text-align:left;"> Investitionsbetrag in Euro der dem Startup zufließt.</td>
+{% elif participant.vars.row3 == 5 %}
+<td ><strong>Innovationsgrad:</strong></td>
+<td  style="text-align:left;"> Inkrementelle Innovationen ergänzen und erweitern existierende Produkte und Prozesse. Durchbruchsinnovationen verändern Märkte und können existierende Produkte und Prozesse obsolet machen.   </td>
+{% endif %}
+</tr>
+<tr >
+  {% if participant.vars.row4 == 1 %}
+<td ><strong>Ökologischer Beitrag:</strong> </td>
+<td style="text-align:left;">Geschäftsidee trägt positiv zum Umwelt-/Klimaschutz bei, indem sie z.B. zu relativ geringeren Emissionen führt oder ressourcenschonend wirkt. </td>
+{% elif participant.vars.row4 == 2 %}
+<td ><strong>Erwartete Rendite:</strong></td>
+<td  style="text-align:left;">Erwarteter interner Zinsfuß des Investments den Sie aus den Angaben der Gründer zu Zeitpunkt und Höhe der erwarteten Cash-Flows grob kalkuliert haben. </td>
+{% elif participant.vars.row4 == 3 %}
+<td ><strong>Positive Cash-Flow-Prognose:</strong></td>
+<td  style="text-align:left;">Dauer bis Einnahmen aus dem laufenden Geschäft höher sind als die Aufwendungen.  </td>
+{% elif participant.vars.row4 == 4 %}
+<td ><strong>Investitionshöhe:<br>(Kapitalbedarf)</strong></td>
+<td  style="text-align:left;"> Investitionsbetrag in Euro der dem Startup zufließt.</td>
+{% elif participant.vars.row4 == 5 %}
+<td ><strong>Innovationsgrad:</strong></td>
+<td  style="text-align:left;"> Inkrementelle Innovationen ergänzen und erweitern existierende Produkte und Prozesse. Durchbruchsinnovationen verändern Märkte und können existierende Produkte und Prozesse obsolet machen.   </td>
+{% endif %}
+</tr>
+<tr >
+  {% if participant.vars.row5 == 1 %}
+<td ><strong>Ökologischer Beitrag:</strong> </td>
+<td style="text-align:left;">Geschäftsidee trägt positiv zum Umwelt-/Klimaschutz bei, indem sie z.B. zu relativ geringeren Emissionen führt oder ressourcenschonend wirkt. </td>
+{% elif participant.vars.row5 == 2 %}
+<td ><strong>Erwartete Rendite:</strong></td>
+<td  style="text-align:left;">Erwarteter interner Zinsfuß des Investments den Sie aus den Angaben der Gründer zu Zeitpunkt und Höhe der erwarteten Cash-Flows grob kalkuliert haben. </td>
+{% elif participant.vars.row5 == 3 %}
+<td ><strong>Positive Cash-Flow-Prognose:</strong></td>
+<td  style="text-align:left;">Dauer bis Einnahmen aus dem laufenden Geschäft höher sind als die Aufwendungen.  </td>
+{% elif participant.vars.row5 == 4 %}
+<td ><strong>Investitionshöhe:<br>(Kapitalbedarf)</strong></td>
+<td  style="text-align:left;"> Investitionsbetrag in Euro der dem Startup zufließt.</td>
+{% elif participant.vars.row5 == 5 %}
+<td ><strong>Innovationsgrad:</strong></td>
+<td  style="text-align:left;"> Inkrementelle Innovationen ergänzen und erweitern existierende Produkte und Prozesse. Durchbruchsinnovationen verändern Märkte und können existierende Produkte und Prozesse obsolet machen.   </td>
+{% endif %}
+</tr>
+
+</tbody>
+</table>
+
+<strong>Bitte geben Sie jeweils an, welches dieser Startups Sie am ehesten für eine Finanzierung in Betracht ziehen würden und welches am wenigsten</strong>.
+</p>
+<br>
+<p align="justify"><b>Bevor wir starten, bitten wir Sie noch um zwei Angaben.<br></b></p> 
+
+<b>1.</b> Teilen Sie uns bitte mit, wie viel Sie typischerweise in einer ersten Finanzierungsrunde pro Startup investieren.
+<br></p>
+<div class="invest">
+<input type="text" id="id_inv" name="inv" oninput="edit()"><span>€</span>
+<div id="inved"></div>
+{{ form.inv.errors }} 
+</div>
+<br>
+{% if player.treat == 1 %}
+
+<b>2.</b> Was schätzen Sie, wie hoch ist der Anteil grüner Investments (Startups mit ökologischen Zielen) gemessen an der <strong>Anzahl an Investitionen deutscher Venture Capital Investoren</strong> durchschnittlich? <br><br>
+Bitte klicken Sie in die blaue Leiste, um den Schieberegler zu betätigen und klicken Sie danach auf "Einschätzung abgeben". </p>
+    <div class=b width="80%" height="50px" style="text-align:left;">
+
+
+                <input  type="range" min="0" max="100" step="0.5" value="" class="slider2" id="slider2"  onchange="updateTextInput2(this.value);" onclick="showhide2()">
+                <span id="show2"></span>
+
+                <span id="show5"></span>
+                <p id="p1"><strong>100%</strong></p>
+                <p id="p2"><strong>0%</strong></p>
+                <p id="p3">|</p>
+                <p id="p4">|</p>
+
+                
+  </div>
+<div id="sol" ></div><div class='button1' id="b1" onclick="ch1()">Einschätzung abgeben</div>
+    <input name="guess"  type="hidden" id="textInput2" value="" size="1" style="text-align:center;">
+    <input name="che"  type="hidden" id="textInput3" value="0" size="1" style="text-align:center;">
+    <div id="inf"></div>
+{{ form.guess.errors }} 
+{{ form.che.errors }} 
+<br>
+<br>
+
+{% else %}
+
+
+<b>2.</b> Was schätzen Sie, wie hoch ist der Anteil grüner Investments (Startups mit ökologischen Zielen) gemessen an der <strong>Anzahl</strong> an Investitionen deutscher Venture Capital Investoren durchschnittlich? <br><br>
+Bitte klicken Sie in die blaue Leiste, um den Schieberegler zu betätigen. </p>
+    <div class=b width="80%" height="50px" style="text-align:left;">
+
+
+                <input  type="range" min="0" max="100" step="0.5" value="" class="slider2" id="slider2"  onchange="updateTextInput2(this.value);" onclick="showhide2()">
+                <span id="show2"></span>
+
+                <span id="show5"></span>
+                <p id="p1"><strong>100%</strong></p>
+                <p id="p2"><strong>0%</strong></p>
+                <p id="p3">|</p>
+                <p id="p4">|</p>
+
+                
+  </div>
+    <input name="guess"  type="hidden" id="textInput2" value="" size="1" style="text-align:center;">
+    <input name="che"  type="hidden" id="textInput3" value="1" size="1" style="text-align:center;">
+    <div id="inf"></div>
+{{ form.guess.errors }} 
+{{ form.che.errors }} 
+<br>
+<br>
+
+
+{% endif %}
+    <button id="button" style="margin-top:10px;" onclick="store()" class="answer btn btn-success"  >Weiter</button>
+</div>
+</div>
+<input type="hidden" id="inv1" name="inv">
+    <div id=wong>
+    {% formfield player.abcd label="" %}  
+    </div>
+{% endblock %}

@@ -1,0 +1,1893 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% block title %}
+    Entscheidung {{ player.round_number }} von 6
+{% endblock %}
+{% block styles %}
+	<style type="text/css">
+	img.im1 {
+      max-width:80%;
+      max-height:80%;
+    }
+    img.im2 {
+      max-width:50%;
+      max-height:50%;
+    }
+    img.im3 {
+      max-width:60%;
+      max-height:60%;
+    }
+
+    input[type='radio'] { transform: scale(1.4); }
+	.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  }
+	.textDiv {
+		position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+		z-index:7;
+	}
+	.cont {
+		z-index:1;
+	}
+  * {
+    font-size: 18px;/* <-- fonts */
+}
+
+tr.border1 td{
+        border-left: : transparent ;
+        border-right: : transparent ;
+    }
+
+.button {
+  -moz-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5c5c5c), color-stop(1, #b7bac2));
+  background:-moz-linear-gradient(top, #212121 5%, #5c5c5c 100%);
+  background:-webkit-linear-gradient(top, #212121 5%, #5c5c5c 100%);
+  background:-o-linear-gradient(top, #212121 5%, #5c5c5c 100%);
+  background:-ms-linear-gradient(top, #212121 5%, #5c5c5c 100%);
+  background:linear-gradient(to bottom, #212121 5%,#5c5c5c 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#212121', endColorstr='#5c5c5c',GradientType=0);
+  background-color:#b7bac2;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #7c7f87;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-weight:bold;
+  font-size:17px;
+  padding:12px 62px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #1c2847;
+  }
+
+  .buttonn {
+  -moz-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #6d747d), color-stop(1, #b7bac2));
+  background:-moz-linear-gradient(top, #6d747d 5%, #a6a9b3 100%);
+  background:-webkit-linear-gradient(top, #6d747d 5%, #a6a9b3 100%);
+  background:-o-linear-gradient(top, #6d747d 5%, #a6a9b3 100%);
+  background:-ms-linear-gradient(top, #6d747d 5%, #a6a9b3 100%);
+  background:linear-gradient(to bottom, #6d747d 5%, #a6a9b3 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6d747d', endColorstr='#a6a9b3',GradientType=0);
+  background-color:#b7bac2;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #7c7f87;
+  display:inline-block;
+  cursor:pointer;
+  color:#7c858f;
+  font-family:Arial;
+  font-weight:bold;
+  font-size:17px;
+  padding:12px 62px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #1c2847;
+  }
+
+
+.button1 {
+  -moz-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #b7bac2), color-stop(1, #7c858f));
+  background:-moz-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-webkit-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-o-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-ms-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:linear-gradient(to bottom, #b7bac2 5%, #7c858f 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7bac2', endColorstr='#7c858f',GradientType=0);
+  background-color:#b7bac2;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #7c7f87;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-weight:bold;
+  font-size:17px;
+  padding:12px 62px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #1c2847;
+  }
+  .button1:hover {
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7c858f), color-stop(1, #b7bac2));
+  background:-moz-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-webkit-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-o-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-ms-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:linear-gradient(to bottom, #7c858f 5%, #b7bac2 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7c858f', endColorstr='#b7bac2',GradientType=0);
+  background-color:#7c858f;
+  }
+  .button1:active {
+  position:relative;
+  top:1px;
+  }
+
+
+
+  .button2 {
+  -moz-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #b7bac2), color-stop(1, #7c858f));
+  background:-moz-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-webkit-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-o-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-ms-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:linear-gradient(to bottom, #b7bac2 5%, #7c858f 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7bac2', endColorstr='#7c858f',GradientType=0);
+  background-color:#b7bac2;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #7c7f87;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-weight:bold;
+  font-size:17px;
+  padding:12px 62px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #1c2847;
+  }
+  .button2:hover {
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7c858f), color-stop(1, #b7bac2));
+  background:-moz-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-webkit-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-o-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-ms-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:linear-gradient(to bottom, #7c858f 5%, #b7bac2 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7c858f', endColorstr='#b7bac2',GradientType=0);
+  background-color:#7c858f;
+  }
+  .button2:active {
+  position:relative;
+  top:1px;
+  }
+
+
+
+
+
+  .button3 {
+  -moz-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #b7bac2), color-stop(1, #7c858f));
+  background:-moz-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-webkit-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-o-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-ms-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:linear-gradient(to bottom, #b7bac2 5%, #7c858f 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7bac2', endColorstr='#7c858f',GradientType=0);
+  background-color:#b7bac2;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #7c7f87;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-weight:bold;
+  font-size:17px;
+  padding:12px 62px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #1c2847;
+  }
+  .button3:hover {
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7c858f), color-stop(1, #b7bac2));
+  background:-moz-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-webkit-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-o-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-ms-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:linear-gradient(to bottom, #7c858f 5%, #b7bac2 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7c858f', endColorstr='#b7bac2',GradientType=0);
+  background-color:#7c858f;
+  }
+  .button3:active {
+  position:relative;
+  top:1px;
+  }
+
+
+.button11 {
+  -moz-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #b7bac2), color-stop(1, #7c858f));
+  background:-moz-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-webkit-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-o-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-ms-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:linear-gradient(to bottom, #b7bac2 5%, #7c858f 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7bac2', endColorstr='#7c858f',GradientType=0);
+  background-color:#b7bac2;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #7c7f87;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-weight:bold;
+  font-size:17px;
+  padding:12px 62px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #1c2847;
+  }
+  .button11:hover {
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7c858f), color-stop(1, #b7bac2));
+  background:-moz-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-webkit-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-o-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-ms-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:linear-gradient(to bottom, #7c858f 5%, #b7bac2 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7c858f', endColorstr='#b7bac2',GradientType=0);
+  background-color:#7c858f;
+  }
+  .button11:active {
+  position:relative;
+  top:1px;
+  }
+
+
+
+  .button22 {
+  -moz-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #b7bac2), color-stop(1, #7c858f));
+  background:-moz-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-webkit-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-o-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-ms-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:linear-gradient(to bottom, #b7bac2 5%, #7c858f 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7bac2', endColorstr='#7c858f',GradientType=0);
+  background-color:#b7bac2;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #7c7f87;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-weight:bold;
+  font-size:17px;
+  padding:12px 62px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #1c2847;
+  }
+  .button22:hover {
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7c858f), color-stop(1, #b7bac2));
+  background:-moz-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-webkit-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-o-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-ms-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:linear-gradient(to bottom, #7c858f 5%, #b7bac2 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7c858f', endColorstr='#b7bac2',GradientType=0);
+  background-color:#7c858f;
+  }
+  .button22:active {
+  position:relative;
+  top:1px;
+  }
+
+
+
+
+
+  .button33 {
+  -moz-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #b7bac2), color-stop(1, #7c858f));
+  background:-moz-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-webkit-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-o-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:-ms-linear-gradient(top, #b7bac2 5%, #7c858f 100%);
+  background:linear-gradient(to bottom, #b7bac2 5%, #7c858f 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7bac2', endColorstr='#7c858f',GradientType=0);
+  background-color:#b7bac2;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #7c7f87;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-weight:bold;
+  font-size:17px;
+  padding:12px 62px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #1c2847;
+  }
+  .button33:hover {
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7c858f), color-stop(1, #b7bac2));
+  background:-moz-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-webkit-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-o-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:-ms-linear-gradient(top, #7c858f 5%, #b7bac2 100%);
+  background:linear-gradient(to bottom, #7c858f 5%, #b7bac2 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7c858f', endColorstr='#b7bac2',GradientType=0);
+  background-color:#7c858f;
+  }
+  .button33:active {
+  position:relative;
+  top:1px;
+  }
+
+
+
+  .buttonco {
+  -moz-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  box-shadow:inset 0px 1px 0px 0px #c7cbd6;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7d94d1), color-stop(1, #7c858f));
+  background:-moz-linear-gradient(top, #7d94d1 5%, #7d94d1 100%);
+  background:-webkit-linear-gradient(top, #7d94d1 5%, #7d94d1 100%);
+  background:-o-linear-gradient(top, #7d94d1 5%, #7d94d1 100%);
+  background:-ms-linear-gradient(top, #7d94d1 5%, #7d94d1 100%);
+  background:linear-gradient(to bottom, #7d94d1 5%, #7d94d1 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7d94d1', endColorstr='#7d94d1',GradientType=0);
+  background-color:#b7bac2;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #7c7f87;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:14px;
+  padding:5px 20px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #1c2847;
+  }
+  .buttonco:hover {
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5c75b8), color-stop(1, #b7bac2));
+  background:-moz-linear-gradient(top, #5c75b8 5%, #5c75b8 100%);
+  background:-webkit-linear-gradient(top, #5c75b8 5%, #5c75b8 100%);
+  background:-o-linear-gradient(top, #5c75b8 5%, #5c75b8 100%);
+  background:-ms-linear-gradient(top, #5c75b8 5%,#5c75b8  100%);
+  background:linear-gradient(to bottom, #5c75b8 5%, #5c75b8 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#5c75b8', endColorstr='#5c75b8',GradientType=0);
+  background-color:#7c858f;
+  }
+  .buttonco:active {
+  position:relative;
+  top:1px;
+  }
+
+
+.help-tip{
+    position: absolute;
+    top: -30%;
+    right: -2.3%;
+    text-align: center;
+    background-color: #BCDBEA;
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    font-size: 12px;
+    line-height: 17px;
+    cursor: default;
+}
+
+.help-tip:before{
+    content:'?';
+    font-weight: bold;
+    color:#fff;
+}
+
+.help-tip:hover p{
+    display:block;
+    transform-origin: 100% 0%;
+
+    -webkit-animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
+
+}
+
+.help-tip p{    /* The tooltip */
+    display: none;
+    text-align: left;
+    background-color: #1E2021;
+    padding: 20px;
+    width: 300px;
+    position: relative;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    right: -4px;
+    color: #FFF;
+    font-size: 13px;
+    line-height: 1.4;
+    z-index: 19;
+    
+}
+
+.help-tip p:before{ /* The pointer of the tooltip */
+    position: relative;
+    content: '';
+    width:0;
+    height: 0;
+    border:6px solid transparent;
+    border-bottom-color:#1E2021;
+    right:10px;
+    top:-12px;
+}
+
+.help-tip p:after{ /* Prevents the tooltip from being hidden */
+    width:100%;
+    height:40px;
+    content:'';
+    position: relative;
+    top:-40px;
+    left:0;
+}
+.pos{
+  position: relative;
+}
+
+
+
+
+.help-tip1{
+    position: absolute;
+    top: 5%;
+    right: 1%;
+    text-align: center;
+    background-color: #BCDBEA;
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    font-size: 12px;
+    line-height: 17px;
+    cursor: default;
+}
+
+.help-tip1:before{
+    content:'?';
+    font-weight: bold;
+    color:#fff;
+}
+
+.help-tip1:hover p{
+    display:block;
+    transform-origin: 100% 0%;
+    -webkit-animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
+
+}
+
+.help-tip1 p{    /* The tooltip */
+    display: none;
+    text-align: left;
+    background-color: #1E2021;
+    padding: 20px;
+    width: 300px;
+    position: relative;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    right: -4px;
+    color: #FFF;
+    z-index: 19;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.help-tip1 p:before{ /* The pointer of the tooltip */
+    position: relative;
+    content: '';
+    width:0;
+    height: 0;
+    border:6px solid transparent;
+    border-bottom-color:#1E2021;
+    right:10px;
+    top:-12px;
+}
+
+.help-tip1 p:after{ /* Prevents the tooltip from being hidden */
+    width:100%;
+    height:40px;
+    content:'';
+    position: relative;
+    top:-40px;
+    left:0;
+}
+
+
+
+
+
+
+
+
+.help-tip2{
+    position: absolute;
+    top: -12%;
+    right: -2.7%;
+    text-align: center;
+    background-color: #BCDBEA;
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    font-size: 12px;
+    line-height: 17px;
+    cursor: default;
+}
+
+.help-tip2:before{
+    content:'?';
+    font-weight: bold;
+    color:#fff;
+}
+
+.help-tip2:hover p{
+    display:block;
+    transform-origin: 100% 0%;
+
+    -webkit-animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
+
+}
+
+.help-tip2 p{    /* The tooltip */
+    display: none;
+    text-align: left;
+    background-color: #1E2021;
+    padding: 20px;
+    width: 300px;
+    position: relative;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    right: -4px;
+    color: #FFF;
+    font-size: 13px;
+    line-height: 1.4;
+    z-index: 19;
+}
+
+.help-tip2 p:before{ /* The pointer of the tooltip */
+    position: relative;
+    content: '';
+    width:0;
+    height: 0;
+    border:6px solid transparent;
+    border-bottom-color:#1E2021;
+    right:10px;
+    top:-12px;
+}
+
+.help-tip2 p:after{ /* Prevents the tooltip from being hidden */
+    width:100%;
+    height:40px;
+    content:'';
+    position: relative;
+    top:-40px;
+    left:0;
+}
+
+
+
+
+
+
+
+
+.help-tip3{
+    position: absolute;
+    top: 9%;
+    right: 8%;
+    text-align: center;
+    background-color: #BCDBEA;
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    font-size: 12px;
+    line-height: 17px;
+    cursor: default;
+}
+
+.help-tip3:before{
+    content:'?';
+    font-weight: bold;
+    color:#fff;
+}
+
+.help-tip3:hover p{
+    display:block;
+    transform-origin: 100% 0%;
+
+    -webkit-animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
+
+}
+
+.help-tip3 p{    /* The tooltip */
+    display: none;
+    text-align: left;
+    background-color: #1E2021;
+    padding: 20px;
+    width: 300px;
+    position: relative;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    right: -4px;
+    color: #FFF;
+    font-size: 13px;
+    line-height: 1.4;
+    z-index: 19;
+}
+
+.help-tip3 p:before{ /* The pointer of the tooltip */
+    position: relative;
+    content: '';
+    width:0;
+    height: 0;
+    border:6px solid transparent;
+    border-bottom-color:#1E2021;
+    right:10px;
+    top:-12px;
+}
+
+.help-tip3 p:after{ /* Prevents the tooltip from being hidden */
+    width:100%;
+    height:40px;
+    content:'';
+    position: relative;
+    top:-40px;
+    left:0;
+}
+
+
+
+
+
+
+
+
+.help-tip4{
+    position: absolute;
+    top: 1%;
+    right: 4%;
+    text-align: center;
+    background-color: #BCDBEA;
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    font-size: 12px;
+    line-height: 17px;
+    cursor: default;
+}
+
+.help-tip4:before{
+    content:'?';
+    font-weight: bold;
+    color:#fff;
+}
+
+.help-tip4:hover p{
+    display:block;
+    transform-origin: 100% 0%;
+
+    -webkit-animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
+
+}
+
+.help-tip4 p{    /* The tooltip */
+    display: none;
+    text-align: left;
+    background-color: #1E2021;
+    padding: 20px;
+    width: 300px;
+    position: relative;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    right: -4px;
+    color: #FFF;
+    font-size: 13px;
+    line-height: 1.4;
+    z-index: 19;
+}
+
+.help-tip4 p:before{ /* The pointer of the tooltip */
+    position: relative;
+    content: '';
+    width:0;
+    height: 0;
+    border:6px solid transparent;
+    border-bottom-color:#1E2021;
+    right:10px;
+    top:-12px;
+}
+
+.help-tip4 p:after{ /* Prevents the tooltip from being hidden */
+    width:100%;
+    height:40px;
+    content:'';
+    position: relative;
+    top:-40px;
+    left:0;
+}
+
+
+
+
+
+.help-tip5{
+    position: absolute;
+    top: 9%;
+    right: 11%;
+    text-align: center;
+    background-color: #BCDBEA;
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    font-size: 12px;
+    line-height: 17px;
+    cursor: default;
+}
+
+.help-tip5:before{
+    content:'?';
+    font-weight: bold;
+    color:#fff;
+}
+
+.help-tip5:hover p{
+    display:block;
+    transform-origin: 100% 0%;
+
+    -webkit-animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
+
+}
+
+.help-tip5 p{    /* The tooltip */
+    display: none;
+    text-align: left;
+    background-color: #1E2021;
+    padding: 20px;
+    width: 300px;
+    position: relative;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    right: -4px;
+    color: #FFF;
+    font-size: 13px;
+    line-height: 1.4;
+    z-index: 19;
+}
+
+.help-tip5 p:before{ /* The pointer of the tooltip */
+    position: relative;
+    content: '';
+    width:0;
+    height: 0;
+    border:6px solid transparent;
+    border-bottom-color:#1E2021;
+    right:10px;
+    top:-12px;
+}
+
+.help-tip5 p:after{ /* Prevents the tooltip from being hidden */
+    width:100%;
+    height:40px;
+    content:'';
+    position: relative;
+    top:-40px;
+    left:0;
+}
+
+
+.centerTable{
+      z-index: -99;
+}
+/* CSS animation */
+
+
+@-webkit-keyframes fadeIn {
+    0% { 
+        opacity:0; 
+        transform: scale(0.6);
+    }
+
+    100% {
+        opacity:100%;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    0% { opacity:0; }
+    100% { opacity:100%; }
+}
+    </style>
+
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+<script language="javascript" type="text/javascript">  
+
+
+$('.button1').click(function() {
+        $(this).removeClass('button1');
+        $(this).addClass('button');
+    });
+
+$('.button2').click(function() {
+        $(this).removeClass('button2');
+        $(this).addClass('button');
+    });
+
+$('.button3').click(function() {
+        $(this).removeClass('button3');
+        $(this).addClass('button');
+    });
+
+
+
+$('.button11').click(function() {
+        $(this).removeClass('button11');
+        $(this).addClass('button');
+    });
+
+$('.button22').click(function() {
+        $(this).removeClass('button22');
+        $(this).addClass('button');
+    });
+
+$('.button33').click(function() {
+        $(this).removeClass('button33');
+        $(this).addClass('button');
+    });
+
+
+var count = 1;
+var bu1 = 0;
+var bu2 = 0;
+var bu3 = 0;
+
+
+
+function click1(){
+  if (count == 1) {
+    document.getElementById("a1").value = "1";
+    document.getElementById("b2").innerHTML = "2. Präferenz";
+    document.getElementById("b3").innerHTML = "2. Präferenz";
+    count = count +1;
+    bu1 = bu1 +1;
+
+  }
+  else if (count == 2) {
+        if (bu2 == 1){
+    document.getElementById("a1").value = "2";
+    document.getElementById("b3").innerHTML = "3. Präferenz";
+    count = count +1
+     bu1 = bu1 +1;
+           document.getElementById("b3").classList.remove("button3");
+     document.getElementById("b3").classList.add("button");
+     document.getElementById("a3").value = "3";
+   } else if (bu3 == 1) {
+    document.getElementById("a1").value = "2";
+    document.getElementById("b2").innerHTML = "3. Präferenz";
+    count = count +1
+     bu1 = bu1 +1;
+      document.getElementById("b2").classList.remove("button2");
+     document.getElementById("b2").classList.add("button");
+     document.getElementById("a2").value = "3";
+   } 
+  } else if (count == 3) {
+     count = count +1
+   }
+}
+
+
+function click2(){
+  if (count == 1) {
+    document.getElementById("a2").value = "1";
+    document.getElementById("b1").innerHTML = "2. Präferenz";
+    document.getElementById("b3").innerHTML = "2. Präferenz";
+    count = count +1;
+    bu2 = bu2 +1;
+
+  } else if (count == 2) {
+        if (bu1 == 1){
+    document.getElementById("a2").value = "2";
+    document.getElementById("b3").innerHTML = "3. Präferenz";
+    count = count +1
+     bu1 = bu1 +1;
+      document.getElementById("b3").classList.remove("button3");
+     document.getElementById("b3").classList.add("button");
+     document.getElementById("a3").value = "3";
+
+   } else if (bu3 == 1) {
+    document.getElementById("a2").value = "2";
+    document.getElementById("b1").innerHTML = "3. Präferenz";
+    count = count +1
+     bu1 = bu1 +1;
+    document.getElementById("b1").classList.remove("button1");
+     document.getElementById("b1").classList.add("button");
+     document.getElementById("a1").value = "3";
+   } 
+  } else if (count == 3) {
+     count = count +1
+   }
+}
+
+function click3(){
+  if (count == 1) {
+    document.getElementById("a3").value = "1";
+    document.getElementById("b2").innerHTML = "2. Präferenz";
+    document.getElementById("b1").innerHTML = "2. Präferenz";
+    count = count +1;
+    bu3 = bu3 +1;
+
+  } else if (count == 2) {
+        if (bu2 == 1){
+    document.getElementById("a3").value = "2";
+    document.getElementById("b1").innerHTML = "3. Präferenz";
+    count = count +1
+     bu1 = bu1 +1;
+
+      document.getElementById("b1").classList.remove("button1");
+     document.getElementById("b1").classList.add("button");
+     document.getElementById("a1").value = "3";
+   } else if (bu1 == 1) {
+    document.getElementById("a3").value = "2";
+    document.getElementById("b2").innerHTML = "3. Präferenz";
+    count = count +1
+     bu1 = bu1 +1;
+    document.getElementById("b2").classList.remove("button2");
+     document.getElementById("b2").classList.add("button");
+     document.getElementById("a2").value = "3";
+   } 
+  } else if (count == 3) {
+     
+     count = count +1
+  }
+}
+
+function corr(){
+    count = 1;
+    bu1 = 0;
+    bu2 = 0;
+    bu3 = 0;
+
+    document.getElementById("b3").innerHTML = "1. Präferenz";
+
+   document.getElementById("b3").classList.remove("buttonn");
+     document.getElementById("b3").classList.add("button3");
+      document.getElementById("b3").classList.remove("button");
+     document.getElementById("b3").classList.add("button3");
+
+    document.getElementById("b1").innerHTML = "1. Präferenz";
+
+        document.getElementById("b1").classList.remove("buttonn");
+     document.getElementById("b1").classList.add("button1");
+      document.getElementById("b1").classList.remove("button");
+     document.getElementById("b1").classList.add("button1");
+
+    document.getElementById("b2").innerHTML = "1. Präferenz";
+
+        document.getElementById("b2").classList.remove("buttonn");
+     document.getElementById("b2").classList.add("button2");
+      document.getElementById("b2").classList.remove("button");
+     document.getElementById("b2").classList.add("button2");
+
+     document.getElementById("a1").value = "";
+     document.getElementById("a2").value = "";
+     document.getElementById("a3").value = "";
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<p align="justify">Bitte ordnen Sie die drei vorgestellten Startups gegeben Ihrer Finanzierungspräferenzen.<br>Klicken Sie bitte bei dem Startup auf das Feld "1. Präferenz", das Sie am ehesten finanzieren würden. Daraufhin bitten wir Sie das Feld "2. Präferenz" anzuklicken, bei dem Startup, das Sie gegeben der zwei übrigen Möglichkeiten eher finanzieren würden.<br></p>
+<table class="centerTable" style="border-collapse: collapse; height: 221px; margin-bottom:10px;" border="1" width="100%" cellpadding="5">
+<tbody>
+<tr style="height: 8px;">
+<td style="width: 160px; height: 8px;">&nbsp;</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 8px; text-align: center; background-color:#e9e9e9"><strong><font size= "5px";>Startup1</font></strong></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 8px; text-align: center;background-color:#d9d9d9"><strong><font size= "5px";>Startup1</font></strong></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 8px; text-align: center;background-color:#c7c7c7"><strong><font size= "5px";>Startup1</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 8px; text-align: center; background-color:#e9e9e9"><strong><font size= "5px";>Startup2</font></strong></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 8px; text-align: center;background-color:#d9d9d9"><strong><font size= "5px";>Startup2</font></strong></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 8px; text-align: center;background-color:#c7c7c7"><strong><font size= "5px";>Startup2</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 8px; text-align: center; background-color:#e9e9e9"><strong><font size= "5px";>Startup3</font></strong></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 8px; text-align: center;background-color:#d9d9d9"><strong><font size= "5px";>Startup3</font></strong></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 8px; text-align: center;background-color:#c7c7c7"><strong><font size= "5px";>Startup3</font></strong></td>
+{% endif %}
+</tr>
+<tr style="height: 30px;">
+    {% if participant.vars.row1 == 1 %}
+<td style="width: 160px; height: 30px; vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>ökologischer Beitrag</font></strong></p><div class="help-tip">
+    <p>Geschäftsidee trägt positiv zum Umwelt-/Klimaschutz bei, indem sie z.B. zu relativ geringeren Emissionen führt oder ressourcenschonend wirkt.</p>
+</div></div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size="5">{{attr11}}</font></strong><br>{{attr111}}</td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size="5">{{attr21}}</font></strong><br>{{attr211}}</td>
+ {% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size="5">{{attr31}}</font></strong><br>{{attr311}}</td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size="5">{{attr11}}</font></strong><br>{{attr111}}</td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size="5">{{attr21}}</font></strong><br>{{attr211}}</td>
+ {% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size="5">{{attr31}}</font></strong><br>{{attr311}}</td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size="5">{{attr11}}</font></strong><br>{{attr111}}</td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size="5">{{attr21}}</font></strong><br>{{attr211}}</td>
+ {% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size="5">{{attr31}}</font></strong><br>{{attr311}}</td>
+{% endif %}
+{% elif participant.vars.row1 == 2 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>erwartete Rendite</font></strong></p><div class="help-tip1">
+    <p>Erwarteter interner Zinsfuß des Investments den Sie aus den Angaben der Gründer zu Zeitpunkt und Höhe der erwarteten Cash-Flows abgeleitet haben. .</p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr12}}%</font></strong></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr22}}%</font></strong></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr32}}%</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr12}}%</font></strong></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr22}}%</font></strong></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr32}}%</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr12}}%</font></strong></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr22}}%</font></strong></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr32}}%</font></strong></td>
+{% endif %}
+{% elif participant.vars.row1 == 3 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>Cash-Flow-Prognose<br>positiv in..</font></strong></p><div class="help-tip2">
+    <p>Dauer bis Einnahmen aus dem laufenden Geschäft höher sind als die Aufwendungen.  </p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr13}}</font></strong>
+</td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr23}}</font></strong>
+</td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr33}}</font></strong>
+</td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr13}}</font></strong>
+</td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr23}}</font></strong>
+</td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr33}}</font></strong>
+</td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr13}}</font></strong>
+</td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr23}}</font></strong>
+</td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr33}}</font></strong>
+</td>
+{% endif %}
+{% elif participant.vars.row1 == 4 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>Investitionshöhe</font></strong><br>(Kapitalbedarf)</p><div class="help-tip3">
+    <p>Investitionsbetrag in Euro der dem Startup zufließt.</p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr14}}€</font></strong></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr24}}€</font></strong></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr34}}€</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr14}}€</font></strong></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr24}}€</font></strong></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr34}}€</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr14}}€</font></strong></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr24}}€</font></strong></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr34}}€</font></strong></td>
+{% endif %}
+
+{% elif participant.vars.row1 == 5 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>Innovationsgrad</font></strong></p><div class="help-tip5">
+    <p>Innovationsgrad:  Gibt an, ob sich in einem Markt bereits ähnliche (potentiell weniger innovative) Produkte etablieren konnten. Vergleichbare Produkte können einerseits mehr Konkurrenz bedeuten, andererseits können sie ein Marktbedürfnis signalisieren.</p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr15}}</font></strong></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr25}}</font></strong></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr35}}</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr15}}</font></strong></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr25}}</font></strong></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr35}}</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr15}}</font></strong></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr25}}</font></strong></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr35}}</font></strong></td>
+{% endif %}
+{% endif %}
+</tr>
+
+
+<tr style="height: 30px;">
+{% if participant.vars.row2 == 1 %}
+<td style="width: 160px; height: 30px; vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>ökologischer Beitrag</font></strong></p><div class="help-tip">
+    <p>Geschäftsidee trägt positiv zum Umwelt-/Klimaschutz bei, indem sie z.B. zu relativ geringeren Emissionen führt oder ressourcenschonend wirkt.</p>
+</div></div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size="5">{{attr11}}</font></strong><br>{{attr111}}</td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size="5">{{attr21}}</font></strong><br>{{attr211}}</td>
+ {% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size="5">{{attr31}}</font></strong><br>{{attr311}}</td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size="5">{{attr11}}</font></strong><br>{{attr111}}</td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size="5">{{attr21}}</font></strong><br>{{attr211}}</td>
+ {% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size="5">{{attr31}}</font></strong><br>{{attr311}}</td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size="5">{{attr11}}</font></strong><br>{{attr111}}</td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size="5">{{attr21}}</font></strong><br>{{attr211}}</td>
+ {% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size="5">{{attr31}}</font></strong><br>{{attr311}}</td>
+{% endif %}
+{% elif participant.vars.row2 == 2 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>erwartete Rendite</font></strong></p><div class="help-tip1">
+    <p>Erwarteter interner Zinsfuß des Investments den Sie aus den Angaben der Gründer zu Zeitpunkt und Höhe der erwarteten Cash-Flows abgeleitet haben. </p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr12}}%</font></strong></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr22}}%</font></strong></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr32}}%</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr12}}%</font></strong></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr22}}%</font></strong></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr32}}%</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr12}}%</font></strong></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr22}}%</font></strong></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr32}}%</font></strong></td>
+{% endif %}
+{% elif participant.vars.row2 == 3 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>Cash-Flow-Prognose<br>positiv in..</font></strong></p><div class="help-tip2">
+    <p>Dauer bis Einnahmen aus dem laufenden Geschäft höher sind als die Aufwendungen.  </p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr13}}</font></strong>
+</td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr23}}</font></strong>
+</td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr33}}</font></strong>
+</td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr13}}</font></strong>
+</td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr23}}</font></strong>
+</td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr33}}</font></strong>
+</td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr13}}</font></strong>
+</td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr23}}</font></strong>
+</td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr33}}</font></strong>
+</td>
+{% endif %}
+{% elif participant.vars.row2 == 4 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>Investitionshöhe</font></strong><br>(Kapitalbedarf)</p><div class="help-tip3">
+    <p>Investitionsbetrag in Euro der dem Startup zufließt.</p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr14}}€</font></strong></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr24}}€</font></strong></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr34}}€</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr14}}€</font></strong></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr24}}€</font></strong></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr34}}€</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr14}}€</font></strong></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr24}}€</font></strong></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr34}}€</font></strong></td>
+{% endif %}
+
+{% elif participant.vars.row2 == 5 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>Innovationsgrad</font></strong></p><div class="help-tip5">
+    <p>Innovationsgrad:  Inkrementelle Innovationen ergänzen und erweitern existierende Produkte und Prozesse. Durchbruchsinnovationen verändern Märkte und können existierende Produkte und Prozesse obsolet machen.</p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr15}}</font></strong></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr25}}</font></strong></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr35}}</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr15}}</font></strong></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr25}}</font></strong></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr35}}</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr15}}</font></strong></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr25}}</font></strong></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr35}}</font></strong></td>
+{% endif %}
+{% endif %}
+</tr>
+
+
+<tr style="height: 30px;">
+    {% if participant.vars.row3 == 1 %}
+<td style="width: 160px; height: 30px; vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>ökologischer Beitrag</font></strong></p><div class="help-tip">
+    <p>Geschäftsidee trägt positiv zum Umwelt-/Klimaschutz bei, indem sie z.B. zu relativ geringeren Emissionen führt oder ressourcenschonend wirkt.</p>
+</div></div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size="5">{{attr11}}</font></strong><br>{{attr111}}</td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size="5">{{attr21}}</font></strong><br>{{attr211}}</td>
+ {% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size="5">{{attr31}}</font></strong><br>{{attr311}}</td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size="5">{{attr11}}</font></strong><br>{{attr111}}</td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size="5">{{attr21}}</font></strong><br>{{attr211}}</td>
+ {% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size="5">{{attr31}}</font></strong><br>{{attr311}}</td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size="5">{{attr11}}</font></strong><br>{{attr111}}</td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size="5">{{attr21}}</font></strong><br>{{attr211}}</td>
+ {% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size="5">{{attr31}}</font></strong><br>{{attr311}}</td>
+{% endif %}
+{% elif participant.vars.row3 == 2 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>erwartete Rendite</font></strong></p><div class="help-tip1">
+    <p>Erwarteter interner Zinsfuß des Investments den Sie aus den Angaben der Gründer zu Zeitpunkt und Höhe der erwarteten Cash-Flows abgeleitet haben. </p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr12}}%</font></strong></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr22}}%</font></strong></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr32}}%</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr12}}%</font></strong></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr22}}%</font></strong></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr32}}%</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr12}}%</font></strong></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr22}}%</font></strong></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr32}}%</font></strong></td>
+{% endif %}
+{% elif participant.vars.row3 == 3 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>Cash-Flow-Prognose<br>positiv in..</font></strong></p><div class="help-tip2">
+    <p>Dauer bis Einnahmen aus dem laufenden Geschäft höher sind als die Aufwendungen.  </p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr13}}</font></strong>
+</td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr23}}</font></strong>
+</td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr33}}</font></strong>
+</td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr13}}</font></strong>
+</td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr23}}</font></strong>
+</td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr33}}</font></strong>
+</td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr13}}</font></strong>
+</td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr23}}</font></strong>
+</td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr33}}</font></strong>
+</td>
+{% endif %}
+{% elif participant.vars.row3 == 4 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>Investitionshöhe</font></strong><br>(Kapitalbedarf)</p><div class="help-tip3">
+    <p>Investitionsbetrag in Euro der dem Startup zufließt.</p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr14}}€</font></strong></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr24}}€</font></strong></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr34}}€</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr14}}€</font></strong></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr24}}€</font></strong></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr34}}€</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr14}}€</font></strong></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr24}}€</font></strong></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr34}}€</font></strong></td>
+{% endif %}
+{% elif participant.vars.row3 == 5 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>Innovationsgrad</font></strong></p><div class="help-tip5">
+    <p>Innovationsgrad:  Inkrementelle Innovationen ergänzen und erweitern existierende Produkte und Prozesse. Durchbruchsinnovationen verändern Märkte und können existierende Produkte und Prozesse obsolet machen.</p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr15}}</font></strong></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr25}}</font></strong></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr35}}</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr15}}</font></strong></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr25}}</font></strong></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr35}}</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr15}}</font></strong></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr25}}</font></strong></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr35}}</font></strong></td>
+{% endif %}
+{% endif %}
+</tr>
+
+
+<tr style="height: 30px;">
+    {% if participant.vars.row4 == 1 %}
+<td style="width: 160px; height: 30px; vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>ökologischer Beitrag</font></strong></p><div class="help-tip">
+    <p>Geschäftsidee trägt positiv zum Umwelt-/Klimaschutz bei, indem sie z.B. zu relativ geringeren Emissionen führt oder ressourcenschonend wirkt.</p>
+</div></div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size="5">{{attr11}}</font></strong><br>{{attr111}}</td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size="5">{{attr21}}</font></strong><br>{{attr211}}</td>
+ {% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size="5">{{attr31}}</font></strong><br>{{attr311}}</td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size="5">{{attr11}}</font></strong><br>{{attr111}}</td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size="5">{{attr21}}</font></strong><br>{{attr211}}</td>
+ {% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size="5">{{attr31}}</font></strong><br>{{attr311}}</td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size="5">{{attr11}}</font></strong><br>{{attr111}}</td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size="5">{{attr21}}</font></strong><br>{{attr211}}</td>
+ {% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size="5">{{attr31}}</font></strong><br>{{attr311}}</td>
+{% endif %}
+{% elif participant.vars.row4 == 2 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>erwartete Rendite</font></strong></p><div class="help-tip1">
+    <p>Erwarteter interner Zinsfuß des Investments den Sie aus den Angaben der Gründer zu Zeitpunkt und Höhe der erwarteten Cash-Flows abgeleitet haben. </p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr12}}%</font></strong></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr22}}%</font></strong></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr32}}%</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr12}}%</font></strong></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr22}}%</font></strong></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr32}}%</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr12}}%</font></strong></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr22}}%</font></strong></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr32}}%</font></strong></td>
+{% endif %}
+{% elif participant.vars.row4 == 3 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>Cash-Flow-Prognose<br>positiv in..</font></strong></p><div class="help-tip2">
+    <p>Dauer bis Einnahmen aus dem laufenden Geschäft höher sind als die Aufwendungen.  </p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr13}}</font></strong>
+</td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr23}}</font></strong>
+</td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr33}}</font></strong>
+</td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr13}}</font></strong>
+</td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr23}}</font></strong>
+</td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr33}}</font></strong>
+</td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr13}}</font></strong>
+</td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr23}}</font></strong>
+</td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr33}}</font></strong>
+</td>
+{% endif %}
+{% elif participant.vars.row4 == 4 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>Investitionshöhe</font></strong><br>(Kapitalbedarf)</p><div class="help-tip3">
+    <p>Investitionsbetrag in Euro der dem Startup zufließt.</p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr14}}€</font></strong></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr24}}€</font></strong></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr34}}€</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr14}}€</font></strong></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr24}}€</font></strong></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr34}}€</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr14}}€</font></strong></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr24}}€</font></strong></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr34}}€</font></strong></td>
+{% endif %}
+
+{% elif participant.vars.row4 == 5 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>Innovationsgrad</font></strong></p><div class="help-tip5">
+    <p>Innovationsgrad:  Inkrementelle Innovationen ergänzen und erweitern existierende Produkte und Prozesse. Durchbruchsinnovationen verändern Märkte und können existierende Produkte und Prozesse obsolet machen.</p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr15}}</font></strong></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr25}}</font></strong></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr35}}</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr15}}</font></strong></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr25}}</font></strong></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr35}}</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr15}}</font></strong></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr25}}</font></strong></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr35}}</font></strong></td>
+{% endif %}
+{% endif %}
+</tr>
+
+
+<tr style="height: 30px;">
+    {% if participant.vars.row5 == 1 %}
+<td style="width: 160px; height: 30px; vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>ökologischer Beitrag</font></strong></p><div class="help-tip">
+    <p>Geschäftsidee trägt positiv zum Umwelt-/Klimaschutz bei, indem sie z.B. zu relativ geringeren Emissionen führt oder ressourcenschonend wirkt.</p>
+</div></div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size="5">{{attr11}}</font></strong><br>{{attr111}}</td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size="5">{{attr21}}</font></strong><br>{{attr211}}</td>
+ {% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size="5">{{attr31}}</font></strong><br>{{attr311}}</td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size="5">{{attr11}}</font></strong><br>{{attr111}}</td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size="5">{{attr21}}</font></strong><br>{{attr211}}</td>
+ {% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size="5">{{attr31}}</font></strong><br>{{attr311}}</td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size="5">{{attr11}}</font></strong><br>{{attr111}}</td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size="5">{{attr21}}</font></strong><br>{{attr211}}</td>
+ {% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size="5">{{attr31}}</font></strong><br>{{attr311}}</td>
+{% endif %}
+{% elif participant.vars.row5 == 2 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>erwartete Rendite</font></strong></p><div class="help-tip1">
+    <p>Erwarteter interner Zinsfuß des Investments den Sie aus den Angaben der Gründer zu Zeitpunkt und Höhe der erwarteten Cash-Flows abgeleitet haben. </p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr12}}%</font></strong></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr22}}%</font></strong></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr32}}%</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr12}}%</font></strong></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr22}}%</font></strong></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr32}}%</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr12}}%</font></strong></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr22}}%</font></strong></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr32}}%</font></strong></td>
+{% endif %}
+{% elif participant.vars.row5 == 3 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>Cash-Flow-Prognose<br>positiv in..</font></strong></p><div class="help-tip2">
+    <p>Dauer bis Einnahmen aus dem laufenden Geschäft höher sind als die Aufwendungen.  </p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr13}}</font></strong>
+</td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr23}}</font></strong>
+</td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr33}}</font></strong>
+</td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr13}}</font></strong>
+</td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr23}}</font></strong>
+</td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr33}}</font></strong>
+</td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr13}}</font></strong>
+</td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr23}}</font></strong>
+</td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr33}}</font></strong>
+</td>
+{% endif %}
+{% elif participant.vars.row5 == 4 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>Investitionshöhe</font></strong><br>(Kapitalbedarf)</p><div class="help-tip3">
+    <p>Investitionsbetrag in Euro der dem Startup zufließt.</p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr14}}€</font></strong></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr24}}€</font></strong></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr34}}€</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr14}}€</font></strong></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr24}}€</font></strong></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr34}}€</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr14}}€</font></strong></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr24}}€</font></strong></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr34}}€</font></strong></td>
+{% endif %}
+{% elif participant.vars.row5 == 5 %}
+<td style="width: 160px; height: 30px;vertical-align: middle;"><div class="pos">
+<p><strong><font size= 5px;>Innovationsgrad</font></strong></p><div class="help-tip5">
+    <p>Innovationsgrad:  Inkrementelle Innovationen ergänzen und erweitern existierende Produkte und Prozesse. Durchbruchsinnovationen verändern Märkte und können existierende Produkte und Prozesse obsolet machen.</p>
+</div>
+</div>
+</td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr15}}</font></strong></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr25}}</font></strong></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr35}}</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr15}}</font></strong></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr25}}</font></strong></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr35}}</font></strong></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#e9e9e9"><strong><font size= 5px;>{{attr15}}</font></strong></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;center;background-color:#d9d9d9"><strong><font size= 5px;>{{attr25}}</font></strong></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 30px; text-align: center;background-color:#c7c7c7"><strong><font size= 5px;>{{attr35}}</font></strong></td>
+{% endif %}
+{% endif %}
+</tr>
+
+
+
+
+<tr style="height: 55px;">
+  <td><p><strong><font size= 5px;>Präferenzen</font></strong></p></td>
+{% if participant.vars.column1 == 1 %}
+<td style="width: 160px; height: 55px; "><div class='button1' id="b1" onclick="click1()">1. Präferenz</div></td>
+{% elif participant.vars.column2 == 1 %}
+<td style="width: 160px; height: 55px; "><div class='button2' id="b2" onclick="click2()">1. Präferenz</div></td>
+{% elif participant.vars.column3 == 1 %}
+<td style="width: 160px; height: 55px; "><div class='button3' id="b3" onclick="click3()">1. Präferenz</div></td>
+{% endif %}
+{% if participant.vars.column1 == 2 %}
+<td style="width: 160px; height: 55px; "><div class='button1' id="b1" onclick="click1()">1. Präferenz</div></td>
+{% elif participant.vars.column2 == 2 %}
+<td style="width: 160px; height: 55px; "><div class='button2' id="b2" onclick="click2()">1. Präferenz</div></td>
+{% elif participant.vars.column3 == 2 %}
+<td style="width: 160px; height: 55px; "><div class='button3' id="b3" onclick="click3()">1. Präferenz</div></td>
+{% endif %}
+{% if participant.vars.column1 == 3 %}
+<td style="width: 160px; height: 55px; "><div class='button1' id="b1" onclick="click1()">1. Präferenz</div></td>
+{% elif participant.vars.column2 == 3 %}
+<td style="width: 160px; height: 55px; "><div class='button2' id="b2" onclick="click2()">1. Präferenz</div></td>
+{% elif participant.vars.column3 == 3 %}
+<td style="width: 160px; height: 55px; "><div class='button3' id="b3" onclick="click3()">1. Präferenz</div></td>
+{% endif %}
+</tr>
+</tbody>
+</table>
+<table class="centerTable" border="0" width="100%" cellpadding="5">
+<tbody>
+  <tr >
+<td style="text-align: center">
+<div class='buttonco' id="bco" onclick="corr()">Antwort korrigieren</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="centerTable" border="0" width="100%" cellpadding="5">
+<tbody>
+  <tr >
+    
+<td style="text-align: center">
+  {% if player.round_number == 1 %}
+<img class=im1 src="{% static "idce/1of7.png" %}" />
+  {% elif player.round_number == 2 %}
+<img class=im1 src="{% static "idce/2of7.png" %}" />
+  {% elif player.round_number == 3 %}
+<img class=im1 src="{% static "idce/3of7.png" %}" />
+  {% elif player.round_number == 4 %}
+<img class=im1 src="{% static "idce/4of7.png" %}" />
+  {% elif player.round_number == 5 %}
+<img class=im1 src="{% static "idce/5of7.png" %}" />
+  {% elif player.round_number == 6 %}
+<img class=im1 src="{% static "idce/6of7.png" %}" />
+{% endif %}
+</td>
+<td align="right">{% next_button %}
+    </td>
+</tr>
+</tbody>
+</table>
+
+<input name="submitted_answer1" id="a1" required="" type="hidden" value="" />
+<input name="submitted_answer2" id="a2" required="" type="hidden" value="" />
+<input name="submitted_answer3" id="a3" required="" type="hidden" value="" />
+
+
+
+{% endblock %}
